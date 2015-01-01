@@ -53,6 +53,10 @@ do
 			shift
 			shift
 			;;
+		--)
+			shift
+			break
+			;;
 		-:)
 			_usage
 			;;
