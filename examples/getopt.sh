@@ -1,14 +1,14 @@
 #! /bin/sh
 
-function _usage {
+_usage () {
 	echo "Usage: [-a] [-b arg] [arg ...]"
-	exit -1
 }
 
 OSTRING=":ab:"
 ARGS=`getopt "$OSTRING" $*`
 if [ $? -ne 0 ] ; then
 	_usage
+	exit 1
 fi
 set -- $ARGS
 
@@ -21,15 +21,11 @@ do
 			;;
 		-b)
 			echo "opt b found arg: $2"
-			shift
-			shift
+			shift 2
 			;;
 		--)
 			shift
 			break
-			;;
-		-:)
-			_usage
 			;;
 	esac
 done

@@ -28,45 +28,43 @@ CONFIG=\
 ".PHONY: all, clean, fclean, re, _mkdir
 .SUFFIXES: ";
 
-function _usage {
-	echo "Usage: ./makegen [-L] [-s srcs_dir] [-I incs_dir] output_name"
-	exit -1
+_usage () {
+	echo "Usage: ./makegen [-L] [-s srcs_dir] [-I incs_dir] NAME"
 }
 
-args=`getopt :Ls:I: $0`
+args=`getopt :Ls:I: $*`
 if [ $? -ne 0 ] ; then
 	_usage
+	exit 1
 fi
 set -- $args
 
-while [-n "$*"]
+while [ -n "$*" ]
 do
 	case $1 in
 		-L)
 			shift
 			;;
 		-s)
-			shift
-			shift
+			shift 2
 			;;
 		-I)
-			shift
-			shift
+			shift 2
 			;;
 		--)
 			shift
 			break
 			;;
-		-:)
-			_usage
-			;;
 	esac
 done
 if [ -z "$1" ] ; then
 	_usage
+	exit 2
 fi
+NAME="NAME\t:\t$1"
 
 MAKEFILE="$HEADER\n";
-MAKEFILE+="$CONFIG\n";
+MAKEFILE="$MAKEFILE$CONFIG\n";
+MAKEFILE="$MAKEFILE\n$NAME\n";
 
 echo "$MAKEFILE"
