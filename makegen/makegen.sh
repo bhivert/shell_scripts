@@ -48,7 +48,7 @@ _help () {
 	  -r <path>\t  add a depends for recompiling SRCS.
 
 	Bugs resolution:
-	  \"-+\" option have to be set befor the first \"-d\" opt"
+	  \"-+\" option have to be set befor the first \"-d\" option"
 }
 
 ARGS=`getopt as+D:C:I:r:L:l:h $*`

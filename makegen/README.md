@@ -13,4 +13,4 @@ Example: ./makegen.sh [-a] [-+] [[-d <dir>] ...] [[-C <dir> ...] [-I <dir>] NAME
 	  -r <path>   add a depends for recompiling SRCS.
 
 	Bugs resolution:
-	  "-+" option have to be set befor the first "-d" opt
+	  "-+" option have to be set befor the first "-d" option
