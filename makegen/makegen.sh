@@ -223,9 +223,9 @@ endif\n"
 OBJS_DIR="OBJS_DIR\t=\tobjs"
 OBJS="OBJS\t\t=\t"
 if [ $IS_CPP -eq 0 ]; then
-	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.c=.o))) \n"
+	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.c=.o)))\n"
 else
-	OBJS="$OBJS\$(notdir \$(SRCS:.cpp=.o)) \n"
+	OBJS="$OBJS\$(notdir \$(SRCS:.cpp=.o))\n"
 fi
 
 RULES=\
@@ -259,7 +259,11 @@ _mkdir\t\t:
 \t@mkdir -p \$(OBJS_DIR)
 
 _make\t\t:
+ifeq \$(DEBUG, 2)
+\t\$(foreach MAKE, \$(SUB_MAKE),make -C \$(MAKE) DEBUG=\$(DEBUG);)
+else
 \t\$(foreach MAKE, \$(SUB_MAKE),make -C \$(MAKE);)
+endif
 
 _make_clean\t\t:
 \t\$(foreach MAKE, \$(SUB_MAKE),make -C \$(MAKE) clean;)
