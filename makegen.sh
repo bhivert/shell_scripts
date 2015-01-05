@@ -233,7 +233,6 @@ RULES=\
 "VPATH\t\t=\t\$(foreach SRC, \$(SRCS), \$(dir \$(SRC)))
 
 all\t\t:\t_mkdir \$(NAME)
-\t@echo \$(OBJS)
 
 \$(NAME)\t\t:\t\$(OBJS)"
 if [ $IS_SHARED_LIB -eq 1 ]; then
