@@ -35,7 +35,7 @@ $0 -h for more informations"
 
 _help () {
 	echo "Usage: $0 [[options [args]] ...] NAME"
-	echo "Usage: $0 [-a] [-+] [[-d <dir>] ...] [[-C <dir> ...] [-I <dir>] NAME"
+	echo "Usage: $0 [-a] [-+] [[-d <dir>] ...] [[-C <dir>] ...] [-I <dir>] NAME"
 	echo "Help:
 	options:\tdescription:
 	  NAME\t\t  makefife NAME value:

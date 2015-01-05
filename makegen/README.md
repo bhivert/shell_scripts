@@ -1,6 +1,6 @@
 Usage: ./makegen.sh [[options [args]] ...] NAME
 
-Example: ./makegen.sh [-a] [-+] [[-d <dir>] ...] [[-C <dir> ...] [-I <dir>] NAME
+Usage: ./makegen.sh [-a] [-+] [[-d <dir>] ...] [[-C <dir>] ...] [-I <dir>] NAME
 
 	options:    description:
 	  NAME        makefife NAME value:
