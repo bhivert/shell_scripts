@@ -210,14 +210,14 @@ ifeq (\$(DEBUG), 0)\n"
 if [ $IS_CPP -eq 0 ]; then
 	COMPIL="$COMPIL\tCC\t=\tgcc\n"
 else
-	COMPIL="$COMPIL\tCC\t=\tc++\n"
+	COMPIL="$COMPIL\tCC\t=\tg++\n"
 fi
 COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra \$(INCS_FLAGS) -O3
 else\n"
 if [ $IS_CPP -eq 0 ]; then
 	COMPIL="$COMPIL\tCC\t=\tcc\n"
 else
-	COMPIL="$COMPIL\tCC\t=\tc++\n"
+	COMPIL="$COMPIL\tCC\t=\tg++\n"
 fi
 COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra -Werror \$(INCS_FLAGS) -g3
 endif\n"
@@ -261,7 +261,7 @@ _mkdir\t\t:
 \t@mkdir -p \$(OBJS_DIR)
 
 _make\t\t:
-ifeq \$(DEBUG, 2)
+ifeq (\$(DEBUG), 2)
 \t\$(foreach MAKE, \$(SUB_MAKE),make -C \$(MAKE) DEBUG=\$(DEBUG);)
 else
 \t\$(foreach MAKE, \$(SUB_MAKE),make -C \$(MAKE);)
