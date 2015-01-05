@@ -38,9 +38,9 @@ _help () {
 	echo "Usage: $0 [-a] [-+] [[-d <dir>] ...] [[-C <dir>] ...] [-I <dir>] NAME"
 	echo "Help:
 	options:\tdescription:
-	  NAME\t\t  makefife NAME value:
-	  -a\t\t  makefife out file are a library (NAME.a).
-	  -s\t\t  makefife out file are a shared library (NAME.so). Override -a.
+	  NAME\t\t  makefife NAME value.
+	  -a\t\t  makefife out file is a library (NAME.a).
+	  -s\t\t  makefife out file is a shared library (NAME.so). Override -a.
 	  -+\t\t  use of g++ (srcs/*.cpp) instead gcc (srcs/*.c).
 	  -D <dir>\t  add a srcs directory.
 	  -C <dir>\t  add a sub makefile.
