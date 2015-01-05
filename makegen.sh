@@ -42,16 +42,16 @@ _help () {
 	  -a\t\t  makefife out file are a library (NAME.a).
 	  -s\t\t  makefife out file are a shared library (NAME.so). Override -a.
 	  -+\t\t  use of g++ (srcs/*.cpp) instead gcc (srcs/*.c).
-	  -d <dir>\t  add a srcs directory.
+	  -D <dir>\t  add a srcs directory.
 	  -C <dir>\t  add a sub makefile.
 	  -I <dir>\t  add an includes directory.
-	  -D <path>\t  add a depends for recompiling SRCS_DIR
+	  -r <path>\t  add a depends for recompiling SRCS.
 
 	Bugs resolution:
 	  \"-+\" option have to be set befor the first \"-d\" opt"
 }
 
-ARGS=`getopt as+d:C:I:D:L:l:h $*`
+ARGS=`getopt as+D:C:I:r:L:l:h $*`
 if [ $? -ne 0 ] ; then
 	_usage
 	exit 1
@@ -84,10 +84,9 @@ do
 			IS_CPP=1
 			shift
 			;;
-		-d)
+		-D)
 			SRCS_DIR=$(echo "$2_dir" | tr \'\[:lower:]\' \'\[:upper:]\')
 			SRCS_FILES_TMP=$(echo "$2_srcs" | tr \'\[:lower:]\' \'\[:upper:]\')
-
 			if [ -n "$SRCS_FILES" ]; then
 				SRCS_FILES="$SRCS_FILES\n"
 			fi
@@ -125,7 +124,7 @@ do
 			INCS_FLAGS="$INCS_FLAGS-I$2 \\\\\n"
 			shift 2
 			;;
-		-D)
+		-r)
 			if [ -z "$DEPENDS" ]; then
 				DEPENDS="DEPENDS\t\t=\t"
 			else
