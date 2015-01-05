@@ -227,7 +227,7 @@ OBJS="OBJS\t\t=\t"
 if [ $IS_CPP -eq 0 ]; then
 	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.c=.o)))\n"
 else
-	OBJS="$OBJS\$(notdir \$(SRCS:.cpp=.o))\n"
+	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.cpp=.o)))\n"
 fi
 
 RULES=\
@@ -245,8 +245,14 @@ else
 		RULES="$RULES\n\t\$(CC) \$(CFLAGS) \$^ -o \$@ \$(LIBS_DIR) \$(LIBS)"
 	fi
 fi
+if [ $IS_CPP -eq 0 ]; then
+	RULES="$RULES
+\n\$(OBJS_DIR)/%.o\t:\t%.c \$(DEPENDS)"
+else
+	RULES="$RULES
+\n\$(OBJS_DIR)/%.o\t:\t%.cpp \$(DEPENDS)"
+fi
 RULES="$RULES
-\n\$(OBJS_DIR)/%.o\t:\t%.c \$(DEPENDS)
 \t\$(CC) \$(CFLAGS) -c \$< -o \$@
 
 clean\t\t:\t_make_clean
