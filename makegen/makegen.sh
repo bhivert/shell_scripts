@@ -46,6 +46,8 @@ _help () {
 	  -C <dir>\t  add a sub makefile.
 	  -I <dir>\t  add an includes directory.
 	  -r <path>\t  add a depends for recompiling SRCS.
+	  -L <dir>\t  add a library directory.
+	  -l <dir>\t  add a library.
 
 	Bugs resolution:
 	  \"-+\" option have to be set befor the first \"-d\" option"

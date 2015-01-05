@@ -11,6 +11,8 @@ Usage: ./makegen.sh [-a] [-+] [[-d <dir>] ...] [[-C <dir>] ...] [-I <dir>] NAME
 	  -C <dir>    add a sub makefile.
 	  -I <dir>    add an includes directory.
 	  -r <path>   add a depends for recompiling SRCS.
+	  -L <dir>    add a library directory.
+	  -l <dir>    add a library.
 
 	Bugs resolution:
 	  "-+" option have to be set befor the first "-d" option
