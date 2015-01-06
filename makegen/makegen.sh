@@ -212,14 +212,14 @@ if [ $IS_CPP -eq 0 ]; then
 else
 	COMPIL="$COMPIL\tCC\t=\tg++\n"
 fi
-COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra \$(INCS_FLAGS) -O3
+COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra -Werror \$(INCS_FLAGS) -O3
 else\n"
 if [ $IS_CPP -eq 0 ]; then
 	COMPIL="$COMPIL\tCC\t=\tcc\n"
 else
 	COMPIL="$COMPIL\tCC\t=\tg++\n"
 fi
-COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra -Werror \$(INCS_FLAGS) -g3
+COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra \$(INCS_FLAGS) -g3
 endif\n"
 
 OBJS_DIR="OBJS_DIR\t=\tobjs"
