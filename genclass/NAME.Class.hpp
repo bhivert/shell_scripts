@@ -3,16 +3,16 @@
 
 # include <iostream>
 
-class NAME {
+class name {
 	private:
 	protected:
 	public:
-		NAME(void);
-		NAME(NAME const & src);
-		NAME &	operator=(NAME const & src);
-		virtual	~NAME(void);
-}
+		name(void);
+		name(name const & src);
+		name &	operator=(name const & src);
+		virtual	~name(void);
+};
 
-std::ostream	operator<<(std::ostream & o, NAME const & N);
+std::ostream &	operator<<(std::ostream & o, name const & C);
 
 #endif

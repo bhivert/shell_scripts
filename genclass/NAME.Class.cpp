@@ -1,21 +1,21 @@
-#include "NAME.Class.hpp"
+#include "name.Class.hpp"
 
-NAME::NAME(void) {
+name::name(void) {
 }
 
-NAME::NAME(NAME const & src) {
+name::name(name const & src) {
 	(void)src;
 }
 
-NAME &	operator=(NAME const & src) {
+name &	name::operator=(name const & src) {
 	(void)src;
 	return (*this);
 }
 
-NAME::~NAME(void) {
+name::~name(void) {
 }
 
-std::ostream &	operator<<(std::ostream & o, NAME const & N) {
-	(void)N;
+std::ostream &	operator<<(std::ostream & o, name const & C) {
+	(void)C;
 	return (o);
 }
