@@ -25,7 +25,7 @@ HEADER=\
 # **************************************************************************** #";
 
 CONFIG=\
-".PHONY: all, clean, fclean, re, _mkdir, _make, _make_clean, _make_fclean
+".PHONY: all, clean, fclean, re, _make, _make_clean, _make_fclean
 .SUFFIXES:\n";
 
 _usage () {
@@ -87,8 +87,8 @@ do
 			shift
 			;;
 		-D)
-			SRCS_DIR=$(echo "$2_dir" | tr \'\[:lower:]\' \'\[:upper:]\')
-			SRCS_FILES_TMP=$(echo "$2_srcs" | tr \'\[:lower:]\' \'\[:upper:]\')
+			SRCS_DIR=$(echo "$2_dir" | tr / _ | tr \'\[:lower:]\' \'\[:upper:]\')
+			SRCS_FILES_TMP=$(echo "$2_srcs" | tr / _ | tr \'\[:lower:]\' \'\[:upper:]\')
 			if [ -n "$SRCS_FILES" ]; then
 				SRCS_FILES="$SRCS_FILES\n"
 			fi
@@ -96,14 +96,15 @@ do
 			SRCS_FILES="$SRCS_FILES$SRCS_FILES_TMP\t="
 			if [ -d $2 ]; then
 				if [ $IS_CPP -eq 1 ]; then
-					SRCS_LS=$(find $2/* -name "*.cpp" \
+					SRCS_LS=$(ls -1 $2/*.cpp \
 						| awk 'NR == 1 {print "\t"$0,"\\\\"} NR > 1 {print "\t\t\t"$0,"\\\\"}' \
-						|	sed -e "s|^\(\t*\)\([^\/]*\/\)\(.*\)|\1\$($SRCS_DIR)/\3|")
+						| sed -e "s|^\(.*\)\(\/.*\.cpp\)\n$|\t\$($SRCS_DIR)\2 \\\\|")
 				else
-					SRCS_LS=$(find $2/* -name "*.c" \
+					SRCS_LS=$(ls -1 $2/*.c \
 						| awk 'NR == 1 {print "\t"$0,"\\\\"} NR > 1 {print "\t\t\t"$0,"\\\\"}' \
-						|	sed -e "s|^\(\t*\)\([^\/]*\/\)\(.*\)|\1\$($SRCS_DIR)/\3|")
+						| sed -e "s|^\(.*\)\(\/.*\.c\)$|\t\$($SRCS_DIR)\2 \\\\|")
 				fi
+				echo $SRCS_LS
 				SRCS_FILES="$SRCS_FILES$SRCS_LS"
 			else
 				SRCS_FILES="$SRCS_FILES\t"
@@ -202,7 +203,7 @@ fi
 if [ -z "$LIBS" ]; then
 	LIBS="LIBS\t\t=\t\n"
 fi
-LIBS="$LIBS_DIR$LIBS"
+LIBS="$LIBS_DIR\n$LIBS"
 
 COMPIL=\
 "DEBUG\t\t=\t0
@@ -222,18 +223,16 @@ fi
 COMPIL="$COMPIL\tCFLAGS\t=\t-Wall -Wextra \$(INCS_FLAGS) -g3
 endif\n"
 
-OBJS_DIR="OBJS_DIR\t=\tobjs"
 OBJS="OBJS\t\t=\t"
 if [ $IS_CPP -eq 0 ]; then
-	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.c=.o)))\n"
+	OBJS="$OBJS\$(SRCS:.c=.o)\n"
 else
-	OBJS="$OBJS\$(foreach SRC, \$(SRCS), \$(OBJS_DIR)/\$(notdir \$(SRC:.cpp=.o)))\n"
+	OBJS="$OBJS\$(SRCS:.cpp=.o)\n"
 fi
 
 RULES=\
-"VPATH\t\t=\t\$(foreach SRC, \$(SRCS), \$(dir \$(SRC)))
-
-all\t\t:\t_mkdir \$(NAME)
+"
+all\t\t:\t_make \$(NAME)
 
 \$(NAME)\t\t:\t\$(OBJS)"
 if [ $IS_SHARED_LIB -eq 1 ]; then
@@ -242,29 +241,26 @@ else
 	if [ $IS_LIB -eq 1 ]; then 
 		RULES="$RULES\n\t@ar rc \$@ \$^\n\tranlib \$@"
 	else
-		RULES="$RULES\n\t\$(CC) \$(CFLAGS) \$^ -o \$@ \$(LIBS_DIR) \$(LIBS)"
+		RULES="$RULES\n\t\$(CC) \$(CFLAGS) \$(LIBS_DIR) \$(LIBS) \$^ -o \$@"
 	fi
 fi
 if [ $IS_CPP -eq 0 ]; then
 	RULES="$RULES
-\n\$(OBJS_DIR)/%.o\t:\t%.c \$(DEPENDS)"
+\n%.o\t:\t%.c \$(DEPENDS)"
 else
 	RULES="$RULES
-\n\$(OBJS_DIR)/%.o\t:\t%.cpp \$(DEPENDS)"
+\n%.o\t:\t%.cpp \$(DEPENDS)"
 fi
 RULES="$RULES
 \t\$(CC) \$(CFLAGS) -c \$< -o \$@
 
 clean\t\t:\t_make_clean
-\trm -rf \$(OBJS_DIR)
+\trm -rf \$(OBJS)
 
 fclean\t\t:\t_make_fclean clean
 \trm -rf \$(NAME)
 
 re\t\t\t:\tfclean all
-
-_mkdir\t\t:
-\t@mkdir -p \$(OBJS_DIR)
 
 _make\t\t:
 ifeq (\$(DEBUG), 2)
@@ -289,7 +285,6 @@ MAKEFILE="$MAKEFILE\n$INCS_FLAGS";
 MAKEFILE="$MAKEFILE\n$SUB_MAKE"
 MAKEFILE="$MAKEFILE\n$SRCS_FILES"
 MAKEFILE="$MAKEFILE\n$SRCS"
-MAKEFILE="$MAKEFILE\n$OBJS_DIR"
 MAKEFILE="$MAKEFILE\n$OBJS"
 MAKEFILE="$MAKEFILE\n$RULES"
 
