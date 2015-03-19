@@ -98,13 +98,12 @@ do
 				if [ $IS_CPP -eq 1 ]; then
 					SRCS_LS=$(ls -1 $2/*.cpp \
 						| awk 'NR == 1 {print "\t"$0,"\\\\"} NR > 1 {print "\t\t\t"$0,"\\\\"}' \
-						| sed -e "s|^\(.*\)\(\/.*\.cpp\)\n$|\t\$($SRCS_DIR)\2 \\\\|")
+						| sed -e "s|^\(.*\/\)\(.*\/.c \)$|\t\$($SRCS_DIR)\2|")
 				else
 					SRCS_LS=$(ls -1 $2/*.c \
 						| awk 'NR == 1 {print "\t"$0,"\\\\"} NR > 1 {print "\t\t\t"$0,"\\\\"}' \
-						| sed -e "s|^\(.*\)\(\/.*\.c\)$|\t\$($SRCS_DIR)\2 \\\\|")
+						| sed -e "s|^\(\t*\)\(.*\/\)*\(.*\)$|\1\$($SRCS_DIR)\/\3|")
 				fi
-				echo $SRCS_LS
 				SRCS_FILES="$SRCS_FILES$SRCS_LS"
 			else
 				SRCS_FILES="$SRCS_FILES\t"
