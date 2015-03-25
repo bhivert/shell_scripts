@@ -1,7 +1,7 @@
 #ifndef NAME_CLASS_HPP
 # define NAME_CLASS_HPP
 
-# include <iostream>
+# include <ostream>
 
 class name {
 	private:
