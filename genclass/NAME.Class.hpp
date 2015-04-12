@@ -6,11 +6,12 @@
 class name {
 	public:
 		name(void);
-		name(name const & src);
-		name &	operator=(name const & src);
 		virtual	~name(void);
+
 	protected:
 	private:
+		name(name const & src);
+		name &	operator=(name const & src);
 };
 
 std::ostream &	operator<<(std::ostream & o, name const & C);

@@ -3,15 +3,6 @@
 name::name(void) {
 }
 
-name::name(name const & src) {
-	(void)src;
-}
-
-name &	name::operator=(name const & src) {
-	(void)src;
-	return (*this);
-}
-
 name::~name(void) {
 }
 
