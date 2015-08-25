@@ -241,7 +241,7 @@ else
 	if [ $IS_LIB -eq 1 ]; then 
 		RULES="$RULES\n\t@ar rc \$@ \$^\n\tranlib \$@"
 	else
-		RULES="$RULES\n\t\$(CC) \$(CFLAGS) \$(LIBS_DIR) \$(LIBS) \$^ -o \$@"
+		RULES="$RULES\n\t\$(CC) \$(CFLAGS) \$^ \$(LIBS_DIR) \$(LIBS) -o \$@"
 	fi
 fi
 if [ $IS_CPP -eq 0 ]; then
