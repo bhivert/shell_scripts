@@ -3,7 +3,7 @@
 if [ -e "$1".Class.hpp ] ; then
 	echo "Class exist already."
 else
-	path="$HOME/00-dev/sh_script/genclass/"
+	path="$HOME/00-devel/00-sh_script/classgen/"
 	sed 's|name|'$1'|g' "$path"NAME.Class.cpp > "$1".Class.cpp
 	sed 's|name|'$1'|g' "$path"NAME.Class.hpp > "$1".Class.hpp.tmp
 	protect=`echo "$1" | tr '[:lower:]' '[:upper:]'`
