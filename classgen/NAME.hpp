@@ -1,5 +1,5 @@
-#ifndef NAME_CLASS_HPP
-# define NAME_CLASS_HPP
+#ifndef NAME_HPP
+# define NAME_HPP
 
 # include <ostream>
 

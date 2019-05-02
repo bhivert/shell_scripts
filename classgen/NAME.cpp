@@ -1,4 +1,4 @@
-#include "name.Class.hpp"
+#include "name.hpp"
 
 name::name(void) {
 }
