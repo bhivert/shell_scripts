@@ -37,7 +37,7 @@ $0 -h for more informations"
 _help () {
 	echo "Usage: $0 [[options [args]] ...] NAME"
 	echo "Usage: $0 [-a] [-+] [[-d <dir>] ...] [[-C <dir>] ...] [-I <dir>] NAME"
-	echo "Help:
+	echo -e "Help:
 	options:\tdescription:
 	  NAME\t\t  makefife NAME value.
 	  -a\t\t  makefife out file is a library (NAME.a).

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -e "$1".Class.hpp ] ; then
+if [ -e "$1".hpp ] ; then
 	echo "Class exist already."
 else
 	path="$HOME/00-devel/00-sh_script/classgen/"
