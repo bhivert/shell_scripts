@@ -1,12 +1,15 @@
 #!/bin/sh
 
-if [ -e "$1".hpp ] ; then
-	echo "Class exist already."
+if [[ -z $1 ]] ; then
+	echo "Usage: "`basename $0`" class_name"
+elif [[ -e $1_class.h ]] ; then
+	echo "$1_class already exist."
 else
-	path="$HOME/00-devel/00-sh_script/classgen/"
-	sed 's|name|'$1'|g' "$path"NAME.cpp > "$1".cpp
-	sed 's|name|'$1'|g' "$path"NAME.hpp > "$1".hpp.tmp
-	protect=`echo "$1" | tr '[:lower:]' '[:upper:]'`
-	sed 's|NAME|'$protect'|g' "$1".hpp.tmp > "$1".hpp
-	rm "$1".hpp.tmp
+	path=`dirname \`realpath $0\``
+	class=`basename $1`_class
+	sed 's|name|'$class'|g' "$path"/NAME.cpp > "$1_class".cpp
+	sed 's|name|'$class'|g' "$path"/NAME.h > "$1_class".h.tmp
+	protect=`echo "$class" | tr '[:lower:]' '[:upper:]'`
+	sed 's|NAME|'$protect'|g' "$1_class".h.tmp > "$1_class".h
+	rm "$1_class".h.tmp
 fi
