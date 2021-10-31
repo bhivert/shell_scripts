@@ -8,8 +8,8 @@ else
 	path=`dirname \`realpath $0\``
 	class=`basename $1`_class
 	sed 's|name|'$class'|g' "$path"/NAME.cpp > "$1_class".cpp
-	sed 's|name|'$class'|g' "$path"/NAME.h > "$1_class".h.tmp
+	sed 's|name|'$class'|g' "$path"/NAME.hpp > "$1_class".hpp.tmp
 	protect=`echo "$class" | tr '[:lower:]' '[:upper:]'`
-	sed 's|NAME|'$protect'|g' "$1_class".h.tmp > "$1_class".h
-	rm "$1_class".h.tmp
+	sed 's|NAME|'$protect'|g' "$1_class".hpp.tmp > "$1_class".hpp
+	rm "$1_class".hpp.tmp
 fi
