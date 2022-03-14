@@ -2,7 +2,7 @@
 # define __NAME_HPP__
 
 /*!
-@file name.cpp
+@file name.hpp
 @brief ...
 */
 
