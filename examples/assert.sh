@@ -3,7 +3,7 @@
 # Copyright (C) 2022 Benoit Hivert <hivert.benoit@gmail.com>
 #
 # Created on 2022/03/14 at 19:28:45 by Benoit Hivert <hivert.benoit@gmail.com>
-# Updated on 2022/03/14 at 20:58:17 by Benoit Hivert <hivert.benoit@gmail.com>
+# Updated on 2022/03/14 at 21:29:47 by Benoit Hivert <hivert.benoit@gmail.com>
 ##
 
 #!/bin/bash
@@ -37,6 +37,7 @@ declare -ar CMDS=(
 	"[[ ! -z \$VAR ]]"
 	"echo \$VAR"
 	"ls"
+	"assert ls"
 	"grep toto <<< 'titi' | cat -e"
 	"ls doNotExists"
 )
